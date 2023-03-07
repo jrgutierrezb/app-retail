@@ -1,0 +1,76 @@
+<c-row ngPreserveWhitespaces>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <!-- Modal -->
+          <app-guide-request #guideRequest></app-guide-request>
+          <app-proform-request #proformRequest></app-proform-request>
+        </div>
+        <!--Busqueda-->
+        <form #customStylesForm="ngForm" cForm [formGroup]="form">
+          <c-row>
+            <c-col sm="6" md="2">
+              <div class="mb-3">
+                <label cLabel>Fecha Desde</label>
+                <input type="date" cFormControl formControlName="datefrom"/>
+              </div>
+            </c-col>
+            <c-col sm="6" md="2">
+              <div class="mb-3">
+                <label cLabel>Fecha Hasta</label>
+                <input type="date" cFormControl formControlName="dateend"/>
+              </div>
+            </c-col>
+            <c-col sm="6" md="2">
+              <div class="mb-3" >
+                <label cLabel>Tipo de solicitud</label>
+                <select cSelect formControlName="catalogid" sizing="sm">
+                  <option *ngFor="let type of types" [value]="type.id" >{{ type.name }}</option>
+                </select>
+              </div>
+            </c-col>
+            
+            <c-col sm="6" md="2">
+              <div class="mb-3">
+                <label cLabel>Estado</label>
+                <select cSelect formControlName="processstateid" sizing="sm">
+                  <option *ngFor="let state of processStates" [value]="state.id" >{{ state.name }}</option>
+                </select>
+              </div>
+            </c-col>
+            <c-col sm="6" md="2">
+              <div class="mb-3">
+                <label cLabel>Prioridad</label>
+                <select cSelect formControlName="prioritytypeid" sizing="sm">
+                  <option *ngFor="let priority of priorities" [value]="priority.id" >{{ priority.name }}</option>
+                </select>
+              </div>
+            </c-col>
+            <c-col sm="6" md="2">
+              <div class="d-grid gap-2 py-4 d-md-flex justify-content-md-end">
+                <button (click)="consultar()" color="secondary" cButton [disabled]="consultando">
+                  <c-spinner *ngIf="consultando" aria-hidden="true" size="sm"></c-spinner>
+                  {{ consultando ? 'Buscando...' : 'Buscar'}}
+                </button>
+              </div>
+            </c-col>
+          </c-row>           
+        </form>
+      </c-card-header>
+      <c-card-body>
+        <div class="mb-3">
+          <h3 cLabel>{{title}}</h3>
+        </div>
+        <app-table #table [hover]="true" 
+          [striped]="true" 
+          [isPagination]="true"
+          [data]="data" 
+          [headers]="headers" 
+          [eventsTable]="eventsTable"
+          (emitEvent)="EditOrDelete($event)">
+        </app-table>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>

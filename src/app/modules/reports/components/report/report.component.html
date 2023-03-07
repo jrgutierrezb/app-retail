@@ -1,0 +1,18 @@
+
+<c-nav variant="tabs">
+  <a [active]="true" [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="0" cNavLink>Tipos de Solicitudes</a>
+  <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="1" cNavLink>Estados Solicitudes</a>
+  <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="2" cNavLink>Prioridad Solicitudes</a>
+</c-nav>
+<c-tab-content #tabContent="cTabContent">
+  <c-tab-pane class="p-3">
+    <app-report-type-request></app-report-type-request>
+  </c-tab-pane>
+  <c-tab-pane class="p-3">
+    <app-report-state></app-report-state>
+  </c-tab-pane>
+  <c-tab-pane class="p-3">
+   <app-report-priority></app-report-priority>
+  </c-tab-pane>
+</c-tab-content>
+

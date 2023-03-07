@@ -1,0 +1,162 @@
+<c-modal #modalLg id="modalLg" size="xl" [visible]="liveDemoVisible" (visibleChange)="handleLiveDemoChange($event)">
+  <app-show-file #showFileModal></app-show-file>
+  <c-modal-header>
+    <h5 cModalTitle>Aprobar Proforma</h5>
+    <button (click)="toggleLiveDemo()" cButtonClose></button>
+  </c-modal-header>
+
+  <c-modal-body>
+
+    <c-row>
+
+      <c-col xs="12">
+        <form #customStylesForm="ngForm" cForm [formGroup]="form" class="row g-3 needs-validation">
+
+          <c-col md="6">
+            <div class="mb-1">
+              <label cLabel>Nombre Solicitante</label>
+              <input cFormControl id="floatingRequestedName" [value]="requestedName" placeholder="Nombre Solicitante" [readonly]="true"/>
+            </div>
+          </c-col>
+
+          <c-col md="6">
+            <div class="mb-1">
+              <label cLabel>Compañia</label>
+              <select [valid]="form.get('billingid').valid" aria-label="Default select example" cSelect formControlName="billingid" >
+                <option *ngFor="let billing of companyToBeBilling" [value]="billing.id">{{ billing.name }}</option>
+              </select>
+              <c-form-feedback [valid]="false">{{ errorFormulario.ObtieneMensajeError(form, 'billingid') }}</c-form-feedback>
+            </div>
+          </c-col>
+
+          <c-col md="6">
+            <div class="mb-1">
+              <label cLabel>Agencia</label>
+              <select [valid]="form.get('agencyid').valid" aria-label="Default select example" cSelect formControlName="agencyid" >
+                <option *ngFor="let agency of agencies" [value]="agency.id">{{ agency.name }}</option>
+              </select>
+              <c-form-feedback [valid]="false">{{ errorFormulario.ObtieneMensajeError(form, 'agencyid') }}</c-form-feedback>
+            </div>
+          </c-col>
+
+          <c-col md="6">
+            <div class="mb-1">
+              <label cLabel>Area</label>
+              <select [valid]="form.get('workdepartmentid').valid" aria-label="Default select example" cSelect formControlName="workdepartmentid" >
+                <option *ngFor="let workDepartment of workDepartments" [value]="workDepartment.id">{{ workDepartment.name }}</option>
+              </select>
+              <c-form-feedback [valid]="false">{{ errorFormulario.ObtieneMensajeError(form, 'workdepartmentid') }}</c-form-feedback>
+            </div>
+          </c-col>
+
+          <c-col md="6">
+            <div class="mb-1">
+              <label cLabel >Tipo solicitud</label>
+              <select [valid]="form.get('catalogid').valid" aria-label="Default select example" cSelect formControlName="catalogid" >
+                <option *ngFor="let type of types" [value]="type.id">{{ type.name }}</option>
+              </select>
+              <c-form-feedback [valid]="false">{{ errorFormulario.ObtieneMensajeError(form, 'catalogid') }}</c-form-feedback>
+            </div>
+          </c-col>
+          
+          <c-col md="6">
+            <div class="mb-1" >
+              <label cLabel >Prioridad</label>
+              <select [valid]="form.get('prioritytypeid').valid" aria-label="Default select example" cSelect formControlName="prioritytypeid">
+                <option *ngFor="let priority of priorities" [value]="priority.id" >{{ priority.name }}</option>
+              </select>
+              <c-form-feedback [valid]="false">{{ errorFormulario.ObtieneMensajeError(form, 'prioritytypeid') }}</c-form-feedback>
+            </div>
+          </c-col>
+
+          <!--<c-col md="6">
+            <div class="mb-1">
+              <input [valid]="form.get('casenumber').valid" cFormControl id="floatingCaseNumber" formControlName="casenumber" placeholder="Número de caso" />
+              <label cLabel for="floatingCaseNumber">Número de caso</label>
+              <c-form-feedback [valid]="false">{{ errorFormulario.ObtieneMensajeError(form, 'casenumber') }}</c-form-feedback>
+            </div>
+          </c-col>
+
+          <c-col md="6">
+            <div class="mb-1">
+              <input [valid]="form.get('description').valid" cFormControl id="floatingProductDescription" formControlName="description" placeholder="Descripción Producto" />
+              <label cLabel for="floatingProductDescription">Descripción Producto</label>
+              <c-form-feedback [valid]="false">{{ errorFormulario.ObtieneMensajeError(form, 'description') }}</c-form-feedback>
+            </div>
+          </c-col>-->
+
+
+          <c-col md="6" *ngIf="!isRequired">
+            <div class="mb-1">
+              <label cLabel>Producto</label>
+              <select [valid]="form.get('productid').valid" aria-label="Default select example" cSelect formControlName="productid" >
+                <option *ngFor="let product of products" [value]="product.id">{{ product.name }}</option>
+              </select>
+              <c-form-feedback [valid]="false">{{ errorFormulario.ObtieneMensajeError(form, 'productid') }}</c-form-feedback>
+            </div>
+          </c-col>
+
+          <c-col md="12" *ngIf="isRequired">
+            <div class="mb-3">
+              <app-data-grid
+                [headers]="headers"
+                [lookups]="lookups"
+                [dataSource]="productsData"
+                [mode]="'row'"
+                [allowAdding]="false"
+                [allowUpdating]="false"
+                [allowDeleting]="false">
+              </app-data-grid>
+            </div>
+          </c-col>
+
+          <c-col md="12" *ngIf="isRequired">
+            <div class="mb-3">
+              <c-card>
+                <c-card-body>
+                  <h5 cCardTitle>Proformas</h5>
+                  <app-grid-master-detail
+                      [headers]="headerProform"
+                      [lookups]="lookups"
+                      [dataSource]="proforms"
+                      [mode]="'popup'"
+                      [allowAdding]="false"
+                      [allowUpdating]="false"
+                      [allowDeleting]="false"
+                      [isSelect]="true"
+                      (showFile)="showFile($event)"
+                      (selectionChanged)="selectionChanged($event)"
+
+                      [hasDetail]="true"
+                      [titleDetail]="'Detalle'"
+                      [keyDetail]="'productproforms'"
+                      [headerDetail]="headerProformDetail"
+                      [lookupDetail]="lookups"
+                      [allowAddingDetail]="false"
+                      [allowUpdatingDetail]="false"
+                      [allowDeletingDetail]="false"
+                      
+
+                      >
+                    </app-grid-master-detail>
+    
+                </c-card-body>
+              </c-card>
+            </div>
+            
+          </c-col>
+          
+          
+        </form>
+      </c-col>
+
+    </c-row>
+    
+  </c-modal-body>
+  <c-modal-footer>
+    <button (click)="toggleLiveDemo()" cButton color="secondary">
+      Cerrar
+    </button>
+    <button cButton color="primary" (click)="save()">Aprobar</button>
+  </c-modal-footer>
+</c-modal>

@@ -1,0 +1,33 @@
+<dx-data-grid id="gridContainer" [dataSource]="dataSource" [showBorders]="true"
+  (onEditingStart)="logEvent('EditingStart', $event)" (onInitNewRow)="logEvent('InitNewRow', $event)"
+  (onRowInserting)="logEvent('RowInserting', $event)" (onRowInserted)="logEvent('RowInserted', $event)"
+  (onRowUpdating)="logEvent('RowUpdating', $event)" (onRowUpdated)="logEvent('RowUpdated', $event)"
+  (onRowRemoving)="logEvent('RowRemoving', $event)" (onRowRemoved)="logEvent('RowRemoved', $event)"
+  (onSaving)="logEvent('Saving', $event)" (onSaved)="logEvent('Saved', $event)"
+  (onEditCanceling)="logEvent('EditCanceling', $event)" (onEditCanceled)="logEvent('EditCanceled', $event)"
+  (onEditorPreparing)="onEditorPreparing($event)">
+  <dxo-paging [enabled]="true"></dxo-paging>
+  <dxo-editing [mode]="mode" [allowUpdating]="allowUpdating" [allowAdding]="allowAdding" [allowDeleting]="allowDeleting"
+    [useIcons]="true">
+    <dxo-popup *ngIf="mode == 'popup'" title="{{titlePopup}}" [showTitle]="mode == 'popup'" [width]="700"
+      [height]="525">
+    </dxo-popup>
+    <dxo-form *ngIf="mode == 'popup'">
+      <dxi-item itemType="group" [colCount]="2" [colSpan]="2">
+        <dxi-item *ngFor="let header of headers" [editorOptions]="header.isModify ? nameEditorOptions : null" [dataField]="header.field"
+          [caption]="header.columnName"></dxi-item>
+      </dxi-item>
+    </dxo-form>
+  </dxo-editing>
+  <ng-container *ngFor="let header of headers">
+    <dxi-column [allowEditing]="header.isModify" [dataField]="header.field"
+      [caption]="header.columnName" [dataType]="header.type" [alignment]="header.format === 'money' ? 'right' : null" 
+      [format]="header.format === 'money' ? 'currency' : null" [editorOptions]="header.format === 'money' ? editorOptions : null">
+      <dxo-lookup *ngIf="header.type == 'lookup'" [dataSource]="getLookup(header.field)" displayExpr="name" valueExpr="id">
+      </dxo-lookup>
+      <dxi-validation-rule *ngIf="header.validate" type="{{header.validate}}"></dxi-validation-rule>
+    </dxi-column>
+  </ng-container>
+  
+
+</dx-data-grid>

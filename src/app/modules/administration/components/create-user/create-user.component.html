@@ -1,0 +1,115 @@
+<c-modal id="liveDemoModal" alignment="center" [visible]="liveDemoVisible" size="lg" (visibleChange)="handleLiveDemoChange($event)">
+    <c-modal-header>
+      <h5 cModalTitle>{{namePage}}</h5>
+      <button (click)="toggleLiveDemo()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+      <c-row>
+        <c-col xs="12">
+
+          <form #customStylesForm="ngForm"
+              cForm 
+              [formGroup]="form"
+              class="row g-3 needs-validation">
+                <c-col md="6">
+                  <div [cFormFloating]="true" class="mb-3">
+                    <input [valid]="form.get('identification').valid" appValidador soloNumeros cFormControl id="floatingIdentification" formControlName="identification" placeholder="Identificacion" />
+                    <label cLabel for="floatingIdentification">Identificación</label>
+                    <c-form-feedback [valid]="false">{{ errorFormulario.ObtieneMensajeError(form, 'identification') }}</c-form-feedback>
+                  </div>
+                </c-col>
+
+                <c-col md="6">
+                  <div [cFormFloating]="true" class="mb-3">
+                    <input [valid]="form.get('firstname').valid" appValidador soloLetras cFormControl id="floatingfirstname" formControlName="firstname" placeholder="First name"  />
+                    <label cLabel for="floatingfirstname">Nombres</label>
+                    <c-form-feedback [valid]="false">{{ errorFormulario.ObtieneMensajeError(form, 'firstname') }}</c-form-feedback>
+                  </div>
+                </c-col>
+
+                <c-col md="6">
+                  <div [cFormFloating]="true" class="mb-3">
+                    <input [valid]="form.get('lastname').valid" appValidador soloLetras cFormControl id="floatinglastname" formControlName="lastname" placeholder="Last name" />
+                    <label cLabel for="floatinglastname">Apellidos</label>
+                    <c-form-feedback [valid]="false">{{ errorFormulario.ObtieneMensajeError(form, 'lastname') }}</c-form-feedback>
+                  </div>
+                </c-col>
+
+                <c-col md="6">
+                  <div [cFormFloating]="true" class="mb-3">
+                    <input [valid]="form.get('mail').valid" cFormControl id="floatingmail" formControlName="mail" placeholder="Mail" />
+                    <label cLabel for="floatingmail">Correo Electrónico</label>
+                    <c-form-feedback [valid]="false">{{ errorFormulario.ObtieneMensajeError(form, 'mail') }}</c-form-feedback>
+                  </div>
+                </c-col>
+
+                <c-col md="6">
+                  <div [cFormFloating]="true" class="mb-3">
+                    <input [valid]="form.get('telephone').valid" appValidador soloNumeros cFormControl id="floatingtelephone" formControlName="telephone" placeholder="Telephone" />
+                    <label cLabel for="floatingtelephone">Teléfono</label>
+                    <c-form-feedback [valid]="false">{{ errorFormulario.ObtieneMensajeError(form, 'telephone') }}</c-form-feedback>
+                  </div>
+                </c-col>
+                <c-col md="6">
+                  <div [cFormFloating]="true" class="mb-3">
+                    <input [valid]="form.get('username').valid" appValidador soloLetras cFormControl id="floatingusername" formControlName="username" placeholder="User name" />
+                    <label cLabel for="floatingusername">Usuario</label>
+                    <c-form-feedback [valid]="false">{{ errorFormulario.ObtieneMensajeError(form, 'username') }}</c-form-feedback>
+                  </div>
+                </c-col>
+
+                <c-col md="6">
+                  <div [cFormFloating]="true" class="mb-3">
+                    <input [valid]="form.get('cellphone').valid" appValidador soloNumeros cFormControl id="floatingcellphone" formControlName="cellphone" placeholder="Cellphone" />
+                    <label cLabel for="floatingcellphone">Celular</label>
+                    <c-form-feedback [valid]="false">{{ errorFormulario.ObtieneMensajeError(form, 'cellphone') }}</c-form-feedback>
+                  </div>
+                </c-col>
+
+                <c-col md="6">
+                  <div [cFormFloating]="true" class="mb-3">
+                    <select [valid]="form.get('profileid').valid" aria-label="Default select example" cSelect formControlName="profileid" >
+                      <option *ngFor="let profile of profiles" [value]="profile.id">{{ profile.name }}</option>
+                    </select>
+                    <c-form-feedback [valid]="false">{{ errorFormulario.ObtieneMensajeError(form, 'profileid') }}</c-form-feedback>
+                  </div>
+                </c-col>
+
+                <c-col md="6">
+                  <div [cFormFloating]="true" class="mb-3">
+                    <select [valid]="form.get('workdepartmentid').valid" aria-label="Default select example" cSelect formControlName="workdepartmentid" >
+                      <option *ngFor="let workDepartment of workDepartments" [value]="workDepartment.id">{{ workDepartment.name }}</option>
+                    </select>
+                    <c-form-feedback [valid]="false">{{ errorFormulario.ObtieneMensajeError(form, 'workdepartmentid') }}</c-form-feedback>
+                  </div>
+                </c-col>
+
+                <c-col md="6">
+                  <div [cFormFloating]="true" class="mb-3">
+                    <select [valid]="form.get('companyid').valid" aria-label="Default select example" cSelect formControlName="companyid" >
+                      <option *ngFor="let billing of companyToBeBilling" [value]="billing.id">{{ billing.name }}</option>
+                    </select>
+                    <c-form-feedback [valid]="false">{{ errorFormulario.ObtieneMensajeError(form, 'companyid') }}</c-form-feedback>
+                  </div>
+                </c-col>
+
+                <c-col md="6">
+                  <div [cFormFloating]="true" class="mb-3">
+                    <select [valid]="form.get('agencyid').valid" aria-label="Default select example" cSelect formControlName="agencyid" >
+                      <option *ngFor="let agency of agencies" [value]="agency.id">{{ agency.name }}</option>
+                    </select>
+                    <c-form-feedback [valid]="false">{{ errorFormulario.ObtieneMensajeError(form, 'agencyid') }}</c-form-feedback>
+                  </div>
+                </c-col>
+              </form>
+
+        </c-col>
+      </c-row>
+    </c-modal-body>
+    <c-modal-footer>
+      <button (click)="toggleLiveDemo()" cButton color="secondary">
+        Cerrar
+      </button>
+      <button cButton color="primary" (click)="save()">Guardar</button>
+    </c-modal-footer>
+  </c-modal>

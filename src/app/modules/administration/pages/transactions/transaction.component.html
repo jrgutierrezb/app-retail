@@ -1,0 +1,24 @@
+<c-row ngPreserveWhitespaces>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button (click)="toggleLiveDemo()" cButton>Nuevo</button>
+          <!-- Modal -->
+          <app-create-or-edit-transaction #createOrEditTransaction></app-create-or-edit-transaction>
+        </div>
+      </c-card-header>
+      <c-card-body>
+        <app-table #table [hover]="true" 
+          [striped]="true" 
+          [isPagination]="true"
+          [data]="data" 
+          [headers]="headers" 
+          [eventsTable]="eventsTable"
+          (emitEvent)="EditOrDelete($event)">
+        </app-table>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
+

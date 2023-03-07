@@ -1,0 +1,70 @@
+<table cTable [hover]="hover" [responsive]="true" caption="top">
+  <thead cTableColor="dark">
+    <tr>
+      <th scope="col">#</th>
+      <th *ngFor="let header of headers" scope="col">{{ header.columnName }}</th>
+      <th *ngIf="eventsTable.length > 0">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items; let i = index">
+      <th scope="row">{{ i }}</th>
+      
+      <td *ngFor="let header of headers" >
+        {{ item[header.field] }}
+      </td>
+      
+      <td *ngIf="eventsTable.length > 0" >
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end" > 
+          <button cButton class="me-1" *ngFor="let event of eventsTable" 
+            [color]="event.color"
+            [cTooltip]="event.description" 
+            variant="ghost"    
+            (click)="emit(item, event.permiso)">
+            <svg cIcon [name]="event.icon"></svg>
+          </button>
+        </div>
+      </td>
+
+    </tr>
+  </tbody>
+</table>
+<c-row *ngIf="isPagination" class="py-2">
+  <c-col sm="6" md="10">
+    <c-pagination >
+      <li cPageItem>
+        <a cPageLink aria-label="Previous" (click)="startPage(1)"><span aria-hidden="true">&laquo;</span></a>
+      </li>
+      <li cPageItem>
+        <a cPageLink aria-label="Previous" (click)="previousPage()"><span aria-hidden="true">‹</span></a>
+      </li>
+
+      <li *ngIf="(currentPage - range) > 1" cPageItem>
+        <a cPageLink> ... </a>
+      </li>
+      
+      <li *ngFor="let item of numberpages" cPageItem [ngClass]="{'active': item === currentPage}">
+        <a cPageLink (click)="goToPage(item)">{{item}}</a>
+      </li>
+
+      <li *ngIf="(currentPage + range) < pageNumber" cPageItem>
+        <a cPageLink> ... </a>
+      </li>
+      
+      <li cPageItem>
+        <a cPageLink aria-label="Next" (click)="nextPage()"><span aria-hidden="true">›</span></a>
+      </li>
+      <li cPageItem>
+        <a cPageLink aria-label="Next" (click)="endPage(pageNumber)"><span aria-hidden="true">&raquo;</span></a>
+      </li>
+    </c-pagination>
+  </c-col>
+  <c-col sm="6" md="2">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end" >
+      <label>Numero de filas</label>
+      <select cSelect [(ngModel)]="itemNumber" (change)="change()">
+        <option *ngFor="let item of paginator" [ngValue]="item">{{ item }}</option>
+      </select>
+    </div>
+  </c-col>
+</c-row>

@@ -1,0 +1,57 @@
+<c-modal id="liveDemoModal" alignment="center" [visible]="liveDemoVisible" size="lg" (visibleChange)="handleLiveDemoChange($event)">
+    <c-modal-header>
+      <h5 cModalTitle>{{namePage}}</h5>
+      <button (click)="toggleLiveDemo()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+      <c-row>
+        <c-col xs="12">
+
+          <form #customStylesForm="ngForm"
+              cForm 
+              [formGroup]="form"
+              class="row g-3 needs-validation">
+                <c-col md="6">
+                  <div [cFormFloating]="true" class="mb-3">
+                    <input [valid]="form.get('name').valid" cFormControl appValidador soloLetras id="floatingName" formControlName="name" placeholder="Nombre" />
+                    <label cLabel for="floatingName">Nombre</label>
+                    <c-form-feedback [valid]="false">{{ errorFormulario.ObtieneMensajeError(form, 'name') }}</c-form-feedback>
+                  </div>
+                </c-col>
+
+                <c-col md="6">
+                  <div [cFormFloating]="true" class="mb-3">
+                    <input [valid]="form.get('description').valid" cFormControl appValidador soloLetras id="floatingdescription" formControlName="description" placeholder="Descripcion" />
+                    <label cLabel for="floatingdescription">Descripción</label>
+                    <c-form-feedback [valid]="false">{{ errorFormulario.ObtieneMensajeError(form, 'description') }}</c-form-feedback>
+                  </div>
+                </c-col>
+
+                <c-col md="6">
+                  <div [cFormFloating]="true" class="mb-3">
+                    <input [valid]="form.get('icon').valid"  cFormControl id="floatingicon" formControlName="icon" placeholder="Icono" />
+                    <label cLabel for="floatingicon">Icono</label>
+                    <c-form-feedback [valid]="false">{{ errorFormulario.ObtieneMensajeError(form, 'icon') }}</c-form-feedback>
+                  </div>
+                </c-col>
+
+                <c-col md="6">
+                  <div [cFormFloating]="true" class="mb-3">
+                    <input [valid]="form.get('url').valid" cFormControl id="floatingurl" formControlName="url" placeholder="Ruta" />
+                    <label cLabel for="floatingurl">Ruta</label>
+                    <c-form-feedback [valid]="false">{{ errorFormulario.ObtieneMensajeError(form, 'url') }}</c-form-feedback>
+                  </div>
+                </c-col>
+
+              </form>
+
+        </c-col>
+      </c-row>
+    </c-modal-body>
+    <c-modal-footer>
+      <button (click)="toggleLiveDemo()" cButton color="secondary">
+        Cerrar
+      </button>
+      <button cButton color="primary" (click)="save()">Guardar</button>
+    </c-modal-footer>
+  </c-modal>

@@ -1,0 +1,58 @@
+<c-row ngPreserveWhitespaces>
+  <c-col xs="12">
+      <c-card class="mb-4">
+        <c-card-header>
+          <form #customStylesForm="ngForm" cForm [formGroup]="form">
+            <c-row>
+
+              <c-col sm="6" md="2">
+                <div class="mb-3">
+                  <label cLabel>Perfil</label>
+                  <select (change)="consultar()" cSelect formControlName="idprofile" >
+                    <option *ngFor="let profile of profiles" [value]="profile.id">{{ profile.name }}</option>
+                  </select>
+                </div>
+              </c-col>
+
+              <c-col sm="6" md="2">
+                <div class="mb-3">
+                  <label cLabel>Modulo</label>
+                  <select (change)="consultar()" cSelect formControlName="idmodule" >
+                    <option *ngFor="let module of modules" [value]="module.id">{{ module.name }}</option>
+                  </select>
+                </div>
+              </c-col>
+
+            </c-row>
+          </form>
+          <!-- Modal -->
+          <app-create-or-edit-profile-permission #createOrEditProfilePermission></app-create-or-edit-profile-permission>
+        </c-card-header>
+        <c-card-body>
+          <c-row class="py-2">
+            <c-col sm="6" md="10">
+              <div class="mb-3">
+                <h3 cLabel>{{title}}</h3>
+              </div>
+            </c-col>
+            <c-col sm="6" md="2">
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end" >
+                <button (click)="toggleLiveDemo()" cButton class="me-1">
+                  <strong>+ Nuevo</strong>
+                </button>
+              </div>
+            </c-col>
+          </c-row>
+          <app-table #table [hover]="true" 
+            [striped]="true" 
+            [isPagination]="true"
+            [data]="data" 
+            [headers]="headers" 
+            [eventsTable]="eventsTable"
+            (emitEvent)="EditOrDelete($event)">
+          </app-table>
+        </c-card-body>
+      </c-card>
+  </c-col>
+</c-row>
+

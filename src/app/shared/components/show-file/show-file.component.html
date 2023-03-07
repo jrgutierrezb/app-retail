@@ -1,0 +1,33 @@
+<c-modal #modalLg id="modalLg" size="xl" [visible]="liveDemoVisible" (visibleChange)="handleLiveDemoChange($event)">
+  <c-modal-header>
+    <h5 cModalTitle>View Document</h5>
+    <button (click)="toggleLiveDemo()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <pdf-viewer *ngIf="this.url !== ''"
+        [src]="this.url"
+        [rotation]="0"
+        [original-size]="false"
+        [show-all]="true"
+        [fit-to-page]="false"
+        [zoom]="1"
+        [zoom-scale]="'page-width'"
+        [stick-to-page]="false"
+        [render-text]="true"
+        [external-link-target]="'blank'"
+        [autoresize]="true"
+        [show-borders]="false"
+        style="width: 100%; height: 580px;"
+    ></pdf-viewer>
+      <!--<object [data]="documentPdfURL()" type="application/pdf" width="90%" height="90%"></object>-->
+  </c-modal-body>
+  <c-modal-footer>
+    <button (click)="toggleLiveDemo()" cButton color="secondary">
+      Cerrar
+    </button>
+    <button  cButton [color]="'success'" variant="ghost"  [cTooltip]="'Descargar'"  class="me-1" (click)="Descargar('Proforma')">
+      <svg cIcon [name]="'cil-arrow-circle-bottom'"></svg>
+      Descargar
+    </button>
+  </c-modal-footer>
+</c-modal>

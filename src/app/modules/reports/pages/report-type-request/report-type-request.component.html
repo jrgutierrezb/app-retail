@@ -1,0 +1,34 @@
+<c-row>
+    <c-col xs="12" lg="12">
+      <c-card class="mb-4">
+        <c-card-header>
+          <div class="d-flex justify-content-between">
+            <div>
+              <h4 class="card-title mb-0">  Tipos de Solicitudes</h4>
+            </div>
+            <form cForm [formGroup]="formSearch">
+              <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons"> 
+                  <div class="btn-group btn-group-toggle mx-3" data-coreui-toggle="buttons">
+                    <select class="form-select form-select-sm" formControlName="yearId">
+                      <option selected>Año</option>
+                      <option *ngFor="let year of years" [value]="year" >{{ year }}</option>
+                    </select>
+                  </div>
+                  <button (click)="changeYears()" class="btn btn-primary" type="button">
+                    Buscar
+                  </button>
+              </div>
+            </form>
+          </div>
+        </c-card-header>
+        <c-card-body>
+          <c-chart *ngIf="dataIsEmpty" type="line" [data]="chartLineData"></c-chart>
+          <span *ngIf="!dataIsEmpty">
+            <div class="alert alert-secondary" role="alert">
+              Consulta no devolvió datos
+            </div>
+          </span>
+        </c-card-body>
+      </c-card>
+    </c-col>
+</c-row>

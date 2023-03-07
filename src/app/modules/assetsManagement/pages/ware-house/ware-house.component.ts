@@ -49,6 +49,11 @@ export class WareHouseComponent implements OnInit {
       isModify: false
     },
     {
+      columnName: 'Fecha Hora',
+      field: 'datecreate',
+      type: 'datetime'
+    },
+    {
       columnName: 'Sociedad Facturada',
       field: 'companydescription',
       type: 'string',

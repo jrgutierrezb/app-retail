@@ -49,7 +49,6 @@ export class LoginComponent implements OnInit {
     }
     this.securityService.Login(this.form.value)
     .subscribe((respuesta) => {
-      debugger
       if(!respuesta.error) {
         this.storageSession(respuesta);
         this.router.navigate(['/dashboard']);

@@ -45,6 +45,11 @@ export class RequestDeniedComponent implements OnInit {
 
   headers: IHeaders[] = [
     {
+      columnName: 'Fecha Hora',
+      field: 'datecreate',
+      type: 'datetime'
+    },
+    {
       columnName: 'Sociedad Facturada',
       field: 'companydescription',
       type: 'string',

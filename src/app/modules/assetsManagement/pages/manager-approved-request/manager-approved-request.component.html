@@ -4,9 +4,9 @@
       <c-card-header>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
           <!-- Modal -->
-          <app-denied-proform-request #deniedproformRequest></app-denied-proform-request>
-          <app-approved-proform-request #approveproformRequest></app-approved-proform-request>
-          <app-received-request #receivedRequest></app-received-request>
+          <app-denied-proform-request #deniedproformRequest (refreshData)="refreshData()"></app-denied-proform-request>
+          <app-approved-proform-request #approveproformRequest (refreshData)="refreshData()"></app-approved-proform-request>
+          <app-received-request #receivedRequest (refreshData)="refreshData()"></app-received-request>
         </div>
         <!--Busqueda-->
         <form #customStylesForm="ngForm" cForm [formGroup]="form">

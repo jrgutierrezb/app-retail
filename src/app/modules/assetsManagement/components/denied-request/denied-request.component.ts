@@ -28,7 +28,7 @@ import { IHeaders } from 'src/app/shared/interfaces/headers';
 })
 export class DeniedRequestComponent implements OnInit {
 
-  @Output() refreshData = new EventEmitter<boolean>();
+  @Output() refreshData = new EventEmitter<void>();
   assetRequest: IAssetRequest = null;
   productsData: IProduct[] = [];
   headers: IHeaders[] = [
@@ -194,7 +194,6 @@ export class DeniedRequestComponent implements OnInit {
   handleLiveDemoChange(event: boolean) {
     this.liveDemoVisible = event;
     this.changeDetectorRef.detectChanges();
-    this.refreshData.emit(event);
   }
 
   getWorkDeparments() {
@@ -324,6 +323,7 @@ export class DeniedRequestComponent implements OnInit {
               'OK'
             ).then((result) => {
               console.log(result);
+              this.refreshData.emit();
               this.handleLiveDemoChange(false);
             }).catch((error) => {
               console.log(error);

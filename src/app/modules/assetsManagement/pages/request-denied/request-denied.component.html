@@ -4,8 +4,8 @@
       <c-card-header>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
           <!-- Modal -->
-          <app-guide-request #guideRequest></app-guide-request>
-          <app-proform-request #proformRequest></app-proform-request>
+          <app-guide-request #guideRequest (refreshData)="refreshData()"></app-guide-request>
+          <app-proform-request #proformRequest (refreshData)="refreshData()"></app-proform-request>
         </div>
         <!--Busqueda-->
         <form #customStylesForm="ngForm" cForm [formGroup]="form">

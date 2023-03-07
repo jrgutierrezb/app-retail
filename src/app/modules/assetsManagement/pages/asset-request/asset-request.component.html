@@ -47,7 +47,7 @@
                     <c-spinner *ngIf="consultando" aria-hidden="true" size="sm"></c-spinner>
                     {{ consultando ? 'Buscando...' : 'Buscar'}}
                   </button>
-                  <app-create-asset-request #createAssetRequest></app-create-asset-request>
+                  <app-create-asset-request #createAssetRequest (refreshData)="refreshData()"></app-create-asset-request>
                 </div>
               </c-col>
             </c-row>           

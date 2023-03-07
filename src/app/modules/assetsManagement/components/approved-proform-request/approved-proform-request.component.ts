@@ -32,7 +32,7 @@ export class ApprovedProformRequestComponent implements OnInit, AfterViewInit {
 
   @ViewChild('showFileModal') showFileModal!: ShowFileComponent;
   
-  @Output() refreshData = new EventEmitter<boolean>();
+  @Output() refreshData = new EventEmitter<void>();
   assetRequest: IAssetRequest = null;
   productsData: IProduct[] = [];
   proforms: IProform[] = [];
@@ -285,7 +285,6 @@ export class ApprovedProformRequestComponent implements OnInit, AfterViewInit {
   handleLiveDemoChange(event: boolean) {
     this.liveDemoVisible = event;
     this.changeDetectorRef.detectChanges();
-    this.refreshData.emit(event);
   }
 
   getWorkDeparments() {
@@ -454,6 +453,7 @@ export class ApprovedProformRequestComponent implements OnInit, AfterViewInit {
         if(!respuesta.error) {
           this.alert.sweetAlert('Confirmación', respuesta.message, 'success', true, false, 'OK').then((result) => {
               console.log(result);
+              this.refreshData.emit();
               this.handleLiveDemoChange(false);
             }).catch((error) => {
               console.log(error);

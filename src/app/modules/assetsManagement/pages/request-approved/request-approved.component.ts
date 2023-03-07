@@ -145,10 +145,8 @@ export class RequestApprovedComponent implements OnInit {
     this.consultar();
   }
 
-  refreshData(refresh: boolean) {
-    if(!refresh) {
-      this.consultar()
-    }
+  refreshData() {
+    this.consultar()
   }
 
   getProcessStates() {

@@ -6,8 +6,8 @@
           <!-- Modal -->
           <!--<app-guide-request #guideRequest></app-guide-request>-->
           <app-show-file #showFileModal></app-show-file>
-          <app-inventory-register #inventoryRegisterRequest></app-inventory-register>
-          <app-dispath-request #dispathRequest></app-dispath-request>
+          <app-inventory-register #inventoryRegisterRequest (refreshData)="refreshData()"></app-inventory-register>
+          <app-dispath-request #dispathRequest (refreshData)="refreshData()"></app-dispath-request>
         </div>
         <!--Busqueda-->
         <form #customStylesForm="ngForm" cForm [formGroup]="form">

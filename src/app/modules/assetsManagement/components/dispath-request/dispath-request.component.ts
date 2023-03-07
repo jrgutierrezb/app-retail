@@ -30,7 +30,7 @@ import { WorkDepartmentService } from '../../services/work-department.service';
 })
 export class DispathRequestComponent implements OnInit {
 
-  @Output() refreshData = new EventEmitter<boolean>();
+  @Output() refreshData = new EventEmitter<void>();
   isDispath: boolean = false;
   assetRequest: IAssetRequest = null;
   productsData: any[] = [];
@@ -394,6 +394,7 @@ export class DispathRequestComponent implements OnInit {
           this.alert.sweetAlert('Confirmación', respuesta.message, 'success', true, false, 'OK').then((result) => {
               console.log(result);
               //this.printer();
+              this.refreshData.emit();
               this.handleLiveDemoChange(false);
             }).catch((error) => {
               console.log(error);

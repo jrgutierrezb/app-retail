@@ -34,7 +34,7 @@ export class ProformRequestComponent implements OnInit {
   
   @ViewChild('showFileModal') showFileModal!: ShowFileComponent;
   
-  @Output() refreshData = new EventEmitter<boolean>();
+  @Output() refreshData = new EventEmitter<void>();
   assetRequest: IAssetRequest = null;
   productsData: IProduct[] = [];
   proforms: IProform[] = [];
@@ -274,7 +274,6 @@ export class ProformRequestComponent implements OnInit {
   handleLiveDemoChange(event: boolean) {
     this.liveDemoVisible = event;
     this.changeDetectorRef.detectChanges();
-    this.refreshData.emit(event);
   }
 
   getWorkDeparments() {
@@ -477,6 +476,7 @@ export class ProformRequestComponent implements OnInit {
               'OK'
             ).then((result) => {
               console.log(result);
+              this.refreshData.emit();
               this.handleLiveDemoChange(false);
             }).catch((error) => {
               console.log(error);

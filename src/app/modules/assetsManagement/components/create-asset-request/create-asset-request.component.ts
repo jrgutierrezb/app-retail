@@ -32,7 +32,7 @@ export class CreateAssetRequestComponent implements OnInit, AfterViewInit {
 
   @ViewChild(DataGridComponent) datagrid: DataGridComponent;
 
-  @Output() refreshData = new EventEmitter<boolean>();
+  @Output() refreshData = new EventEmitter<void>();
     
   assetRequest: IAssetRequest = null;
   productsData: IProduct[] = [];
@@ -147,7 +147,7 @@ export class CreateAssetRequestComponent implements OnInit, AfterViewInit {
       filerequest: new FormControl(this.assetRequest ? this.assetRequest.filerequest : ''),
       catalogid: new FormControl(this.assetRequest ? this.assetRequest.catalogid : null, [Validators.required]),
       prioritytypeid: new FormControl(this.assetRequest ? this.assetRequest.prioritytypeid : null, [Validators.required]),
-      inventoryproductid: new FormControl(this.assetRequest ? this.assetRequest.inventoryproductid : null),
+      inventoryproductid: new FormControl(this.assetRequest ? this.assetRequest.inventoryproductid : null, [Validators.required]),
     });
   }
 
@@ -155,13 +155,15 @@ export class CreateAssetRequestComponent implements OnInit, AfterViewInit {
     let catalogid = this.form.get('catalogid').value;
     let catalog = this.types.find(item => item.id == catalogid);
     this.isRequired = catalog.name == 'Requerimiento';
+    this.form.get('inventoryproductid').setValue(null);
+    this.productsData = [];
     if(this.isRequired){ 
       this.form.get('inventoryproductid').setValidators(null);
     }
     else {
       this.form.get('inventoryproductid').setValidators(Validators.required);
     }
-    this.form.updateValueAndValidity();
+    this.form.get('inventoryproductid').updateValueAndValidity();
   }
 
   selectProduct() {
@@ -392,6 +394,7 @@ export class CreateAssetRequestComponent implements OnInit, AfterViewInit {
             ).then((result) => {
               console.log(result);
               this.LimpiarModal();
+              this.refreshData.emit();
               this.handleLiveDemoChange(false);
             }).catch((error) => {
               console.log(error);

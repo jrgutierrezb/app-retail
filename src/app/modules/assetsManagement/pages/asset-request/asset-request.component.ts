@@ -76,11 +76,6 @@ export class AssetRequestComponent implements OnInit {
       columnName: 'Estado',
       field: 'state',
       type: 'string'
-    },
-    {
-      columnName: 'Prioridad',
-      field: 'priority',
-      type: 'string'
     }
   ]
 
@@ -132,10 +127,8 @@ export class AssetRequestComponent implements OnInit {
     this.consultar();
   }
 
-  refreshData(refresh: boolean) {
-    if(!refresh) {
-      this.consultar()
-    }
+  refreshData() {
+    this.consultar()
   }
 
   getProcessStates() {

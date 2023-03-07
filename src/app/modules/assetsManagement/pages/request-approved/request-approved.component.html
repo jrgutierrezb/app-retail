@@ -5,9 +5,9 @@
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
           <!-- Modal -->
           <!-- <app-create-asset-request #createAssetRequest (refreshData)="refreshData($event)"></app-create-asset-request> -->
-          <app-warehouse-request #wareHouseRequest></app-warehouse-request>
-          <app-approve-request #approveRequest></app-approve-request>
-          <app-denied-request #deniedRequest></app-denied-request>
+          <app-warehouse-request #wareHouseRequest (refreshData)="refreshData()"></app-warehouse-request>
+          <app-approve-request #approveRequest (refreshData)="refreshData()"></app-approve-request>
+          <app-denied-request #deniedRequest (refreshData)="refreshData()"></app-denied-request>
         </div>
          <!--Busqueda-->
         <form #customStylesForm="ngForm" cForm [formGroup]="form">

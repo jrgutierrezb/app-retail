@@ -280,6 +280,7 @@ export class WareHouseComponent implements OnInit {
                 if(!respuesta.error) {
                   this.alert.sweetAlert('Confirmación', respuesta.message, 'success', true, false, 'OK').then((result) => {
                       console.log(result);
+                      this.consultar();
                     }).catch((error) => {
                       console.log(error);
                     });
@@ -323,6 +324,7 @@ export class WareHouseComponent implements OnInit {
                 if(!respuesta.error) {
                   this.alert.sweetAlert('Confirmación', respuesta.message, 'success', true, false, 'OK').then((result) => {
                       console.log(result);
+                      this.consultar();
                     }).catch((error) => {
                       console.log(error);
                     });
@@ -364,6 +366,7 @@ export class WareHouseComponent implements OnInit {
                 if(!respuesta.error) {
                   this.alert.sweetAlert('Confirmación', respuesta.message, 'success', true, false, 'OK').then((result) => {
                       console.log(result);
+                      this.consultar();
                     }).catch((error) => {
                       console.log(error);
                     });

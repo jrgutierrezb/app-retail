@@ -30,7 +30,7 @@ import { WorkDepartmentService } from '../../services/work-department.service';
 })
 export class ReceivedRequestComponent implements OnInit {
 
-  @Output() refreshData = new EventEmitter<boolean>();
+  @Output() refreshData = new EventEmitter<void>();
   assetRequest: IAssetRequest = null;
   productsData: any[] =[];
   inventoryproductsData: any[] = [];
@@ -423,6 +423,7 @@ export class ReceivedRequestComponent implements OnInit {
           this.alert.sweetAlert('Confirmación', respuesta.message, 'success', true, false, 'OK').then((result) => {
               console.log(result);
               //this.printer();
+              this.refreshData.emit();
               this.handleLiveDemoChange(false);
             }).catch((error) => {
               console.log(error);

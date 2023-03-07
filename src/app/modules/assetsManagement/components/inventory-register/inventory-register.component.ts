@@ -29,7 +29,7 @@ import { WorkDepartmentService } from '../../services/work-department.service';
 })
 export class InventoryRegisterComponent implements OnInit {
 
-  @Output() refreshData = new EventEmitter<boolean>();
+  @Output() refreshData = new EventEmitter<void>();
   assetRequest: IAssetRequest = null;
   productsData: any[] = [];
   headers: IHeaders[] = [
@@ -396,6 +396,7 @@ export class InventoryRegisterComponent implements OnInit {
         if(!respuesta.error) {
           this.alert.sweetAlert('Confirmación', respuesta.message, 'success', true, false, 'OK').then((result) => {
               console.log(result);
+              this.refreshData.emit();
               this.handleLiveDemoChange(false);
             }).catch((error) => {
               console.log(error);

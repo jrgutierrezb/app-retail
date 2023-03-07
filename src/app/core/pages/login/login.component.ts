@@ -49,9 +49,23 @@ export class LoginComponent implements OnInit {
     }
     this.securityService.Login(this.form.value)
     .subscribe((respuesta) => {
+      debugger
       if(!respuesta.error) {
         this.storageSession(respuesta);
         this.router.navigate(['/dashboard']);
+      }
+      else {
+        this.alert.sweetAlert('Información', 
+              "Credenciales Incorrectas", 
+              'info',
+              true,
+              false,
+              'OK'
+            ).then((result) => {
+              console.log(result);
+            }).catch((error) => {
+              console.log(error);
+        });
       }
     }, (error) => {
       this.alert.sweetAlert('Confirmación', 

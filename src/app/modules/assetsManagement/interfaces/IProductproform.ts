@@ -3,6 +3,7 @@ export interface IProductproform {
     quantity: number;
     totalvalue: number;
     value: number;
+    catalogid?: number;
     productid: number;
     proformid: number;
 }

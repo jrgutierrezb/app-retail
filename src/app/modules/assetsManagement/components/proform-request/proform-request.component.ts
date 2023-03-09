@@ -82,7 +82,7 @@ export class ProformRequestComponent implements OnInit {
 
   headerProformDetail: IHeaders[] = [
     {
-      field: 'productid',
+      field: 'catalogid',
       columnName: 'Producto',
       type: 'lookup',
       validate: 'required',
@@ -122,10 +122,6 @@ export class ProformRequestComponent implements OnInit {
     },
     {
       field: 'catalogproductid',
-      lookup:[]
-    },
-    {
-      field: 'productid', 
       lookup:[]
     }
   ]
@@ -333,7 +329,6 @@ export class ProformRequestComponent implements OnInit {
       if(!respuesta.error) {
         this.products = respuesta.data;
         this.lookups[0].lookup = this.products;
-        this.lookups[2].lookup = this.products;
       }
       else {
         this.products = [];
@@ -376,10 +371,10 @@ export class ProformRequestComponent implements OnInit {
         this.lookups[1].lookup = this.catalogproducts;
       }
       else {
-        this.products = [];
+        this.catalogproducts = [];
       }
     }, (error) => {
-      this.products = [];
+      this.catalogproducts = [];
     });
   }
 
@@ -397,7 +392,8 @@ export class ProformRequestComponent implements OnInit {
     event.data['productproforms'] = this.assetRequest.products.map((item) => {
       let mapItem: IProductproform = {
         id: null,
-        productid: item.catalogid,
+        catalogid:item.catalogid,
+        productid: item.id,
         proformid: null,
         quantity: item.quantity,
         value: null,

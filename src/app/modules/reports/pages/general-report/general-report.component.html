@@ -40,10 +40,10 @@
                   <c-spinner *ngIf="consultando" aria-hidden="true" size="sm"></c-spinner>
                   {{ consultando ? 'Buscando...' : 'Buscar'}}
                 </button>
-                <!--<button (click)="exportar()" color="success" cButton [disabled]="this.data.length == 0 || (this.data.length > 0 && exportando)" >
+                <button (click)="exportar()" color="success" cButton [disabled]="this.data.length == 0 || (this.data.length > 0 && exportando)" >
                   <c-spinner *ngIf="exportando" aria-hidden="true" size="sm"></c-spinner>
                   {{ exportando ? 'Buscando...' : 'Exportar'}}
-                </button>-->
+                </button>
               </div>
             </c-col>
 

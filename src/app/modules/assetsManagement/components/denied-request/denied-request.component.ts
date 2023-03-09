@@ -136,7 +136,7 @@ export class DeniedRequestComponent implements OnInit {
     return new FormGroup({
       id: new FormControl(this.assetRequest ? this.assetRequest.id : null),
       //productname: new FormControl(this.assetRequest ? this.assetRequest.productname : '', [Validators.required]),
-      description: new FormControl(this.assetRequest ? this.assetRequest.description : '', Validators.required),
+      deniedobservation: new FormControl(null, Validators.required),
       //daterequirement: new FormControl(this.assetRequest ? this.assetRequest.daterequirement : null, [Validators.required]),
       //requiredquantity: new FormControl(this.assetRequest ? this.assetRequest.requiredquantity : '', [Validators.required]),
       casenumber: new FormControl(this.assetRequest ? this.assetRequest.casenumber : ''),

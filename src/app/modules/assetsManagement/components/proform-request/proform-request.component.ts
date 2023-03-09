@@ -397,7 +397,7 @@ export class ProformRequestComponent implements OnInit {
     event.data['productproforms'] = this.assetRequest.products.map((item) => {
       let mapItem: IProductproform = {
         id: null,
-        productid: item.id,
+        productid: item.catalogid,
         proformid: null,
         quantity: item.quantity,
         value: null,

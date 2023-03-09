@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ReportComponent } from './components/report/report.component';
+import { GeneralReportComponent } from './pages/general-report/general-report.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,13 @@ const routes: Routes = [
         component: ReportComponent,
         data: {
           title: 'Reporte'
+        }
+      },
+      {
+        path: 'garfic',
+        component: GeneralReportComponent,
+        data: {
+          title: 'General'
         }
       }
     ]

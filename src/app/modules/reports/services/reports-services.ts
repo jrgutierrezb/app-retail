@@ -23,4 +23,8 @@ import { BaseResponse } from 'src/app/shared/interfaces/baseresponse.interface';
     return this.httpClient.get<BaseResponse<any[]>>(`${this.APIEndpoint}report/years/${year}`);
   }
 
+  GeneralReport(params: any) {
+    return this.httpClient.post<BaseResponse<any[]>>(`${this.APIEndpoint}report/general`, params);
   }
+
+}

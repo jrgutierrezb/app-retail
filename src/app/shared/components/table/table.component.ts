@@ -60,8 +60,14 @@ export class TableComponent implements OnInit {
     this.viewData();
   }
 
-  getDate(item: any, field:string) {
-    return (new Date(item[field])).toISOString().slice(0, 19).replace(/-/g, "/").replace("T", " ");
+  getDate(item: any, field:string, type: string) {
+    if(type == 'datetime') {
+      return (new Date(item[field])).toISOString().slice(0, 19).replace(/-/g, "/").replace("T", " ");
+    }
+    else {
+      return (new Date(item[field])).toISOString().slice(0, 10).replace(/-/g, "/").replace("T", " ");
+    }
+    
   }
 
   emit(item: any, permiso:string) {

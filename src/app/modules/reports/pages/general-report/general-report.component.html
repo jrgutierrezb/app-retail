@@ -1,0 +1,63 @@
+<c-row ngPreserveWhitespaces>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <!--Busqueda-->
+        <form #customStylesForm="ngForm" cForm [formGroup]="form">
+          <c-row>
+            <c-col sm="6" md="2">
+              <div class="mb-3">
+                <label cLabel>Fecha Desde</label>
+                <input type="date" cFormControl formControlName="datefrom"/>
+              </div>
+            </c-col>
+            <c-col sm="6" md="2">
+              <div class="mb-3">
+                <label cLabel>Fecha Hasta</label>
+                <input type="date" cFormControl formControlName="dateend"/>
+              </div>
+            </c-col>
+            <c-col sm="6" md="2">
+              <div class="mb-3" >
+                <label cLabel>Agencia</label>
+                <select cSelect formControlName="agencyid" sizing="sm">
+                  <option *ngFor="let agency of agencies" [value]="agency.id" >{{ agency.name }}</option>
+                </select>
+              </div>
+            </c-col>
+            
+            <c-col sm="6" md="2">
+              <div class="mb-3">
+                <label cLabel>Departamento</label>
+                <select cSelect formControlName="workdepartmentid" sizing="sm">
+                  <option *ngFor="let workdepartment of workdepartments" [value]="workdepartment.id" >{{ workdepartment.name }}</option>
+                </select>
+              </div>
+            </c-col>
+            <c-col sm="6" md="4">
+              <div class="d-grid gap-2 py-4 d-md-flex justify-content-md-end">
+                <button (click)="consultar()" color="secondary" cButton [disabled]="consultando">
+                  <c-spinner *ngIf="consultando" aria-hidden="true" size="sm"></c-spinner>
+                  {{ consultando ? 'Buscando...' : 'Buscar'}}
+                </button>
+                <!--<button (click)="exportar()" color="success" cButton [disabled]="this.data.length == 0 || (this.data.length > 0 && exportando)" >
+                  <c-spinner *ngIf="exportando" aria-hidden="true" size="sm"></c-spinner>
+                  {{ exportando ? 'Buscando...' : 'Exportar'}}
+                </button>-->
+              </div>
+            </c-col>
+
+          </c-row>           
+        </form>
+      </c-card-header>
+      <c-card-body>
+        <app-table #table [hover]="true" 
+          [striped]="true" 
+          [isPagination]="true"
+          [data]="data" 
+          [headers]="headers">
+        </app-table>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>

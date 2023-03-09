@@ -156,11 +156,11 @@ export class CreateAssetRequestComponent implements OnInit, AfterViewInit {
     let catalog = this.types.find(item => item.id == catalogid);
     this.isRequired = catalog.name == 'Requerimiento';
     this.form.get('inventoryproductid').setValue(null);
-    this.productsData = [];
     if(this.isRequired){ 
       this.form.get('inventoryproductid').setValidators(null);
     }
     else {
+      this.productsData = [];
       this.form.get('inventoryproductid').setValidators(Validators.required);
     }
     this.form.get('inventoryproductid').updateValueAndValidity();

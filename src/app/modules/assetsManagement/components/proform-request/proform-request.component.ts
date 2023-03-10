@@ -236,6 +236,7 @@ export class ProformRequestComponent implements OnInit {
                   productproforms:item.productproforms.map(element => {
                     return {
                       ...element,
+                      catalogid: this.assetRequest.products.find(product => product.id == element.productid).catalogid,
                       quantity: this.assetRequest.products.find(product => product.id == element.productid).quantity,
                     }
                   })

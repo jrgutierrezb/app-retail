@@ -72,15 +72,14 @@
             <div class="mb-1">
               <label cLabel >Número de caso</label>
               <input [valid]="form.get('casenumber').valid" cFormControl id="floatingCaseNumber" formControlName="casenumber" placeholder="Número de caso" [readonly]="true"/>
-              <label cLabel for="floatingCaseNumber">Número de caso</label>
               <c-form-feedback [valid]="false">{{ errorFormulario.ObtieneMensajeError(form, 'casenumber') }}</c-form-feedback>
             </div>
           </c-col>
           
-          <c-col md="6" *ngIf="!isRequired">
+          <c-col md="6" >
             <div class="mb-1" >
               <label cLabel>Producto</label>
-              <select [valid]="form.get('inventoryproductid').valid" aria-label="Default select example" cSelect formControlName="inventoryproductid">
+              <select [valid]="form.get('inventoryproductid').valid" aria-label="Default select example" cSelect formControlName="inventoryproductid" [disabledControl]="isEdit">
                 <option *ngFor="let product of invetoryProducts" [value]="product.id" >{{ product.codeproduct + '-' + product.name }}</option>
               </select>
               <c-form-feedback [valid]="false">{{ errorFormulario.ObtieneMensajeError(form, 'inventoryproductid') }}</c-form-feedback>

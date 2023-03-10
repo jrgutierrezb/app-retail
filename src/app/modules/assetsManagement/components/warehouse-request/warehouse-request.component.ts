@@ -276,6 +276,11 @@ export class WarehouseRequestComponent implements OnInit {
     this.catalogService.InventoriesReg(this.assetRequest.billingid, this.assetRequest.agencyid, this.assetRequest.workdepartmentid).subscribe((respuesta) => {
       if(!respuesta.error) {
         this.invetoryProducts = respuesta.data;
+        console.log(this.form.value)
+        setTimeout(() => {
+          this.changeDetectorRef.detectChanges();
+        }, 1000);
+        
       }
       else {
         this.invetoryProducts =  [];

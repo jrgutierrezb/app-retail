@@ -445,10 +445,13 @@ export class CreateAssetRequestComponent implements OnInit, AfterViewInit {
 
   LimpiarModal() {
     this.assetRequest = null;
-    this.form = this.buildForm();
     this.productsData = [];
     this.isEdit = false;
     this.isRequired = false;
+    this.file = null;
+    this.filerequest = null;
+    this.form = this.buildForm();
+    
   }
 
 }

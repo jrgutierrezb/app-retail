@@ -177,6 +177,7 @@ export class ReceivedRequestComponent implements OnInit {
   }
 
   toggleLiveDemo(id?: number) {
+    this.LimpiarModal();
     this.liveDemoVisible = !this.liveDemoVisible;
     this.form = this.buildForm();
     this.isEdit = false;
@@ -451,6 +452,16 @@ export class ReceivedRequestComponent implements OnInit {
 
   ReceivedRequest(assetRequest:  IAssetRequest): Observable<BaseResponse> {
     return this.assetRequestService.ReceivedRequest(assetRequest);
+  }
+
+  LimpiarModal() {
+    this.assetRequest = null;
+    this.productsData = [];
+    this.inventoryproductsData = [];
+    this.isEdit = false;
+    this.isRequired = false;
+    this.form = this.buildForm();
+    
   }
 
 }

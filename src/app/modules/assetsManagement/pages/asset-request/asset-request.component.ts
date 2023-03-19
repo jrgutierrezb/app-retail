@@ -235,6 +235,14 @@ export class AssetRequestComponent implements OnInit {
     let state = data.item.state;
     switch(data.permiso) {
       case 'WRITE': {
+        if(state !== 'Ingresado') {
+          this.alert.sweetAlert('Información', 'No puede editar una solicitud que no se encuentra en estado Ingresado...!',  'warning', true, false, 'OK').then((result) => {
+            console.log(result);
+          }).catch((error) => {
+            console.log(error);
+          });
+          return;
+        }
         this.toggleLiveDemo(data.item.id);
         break;
       }

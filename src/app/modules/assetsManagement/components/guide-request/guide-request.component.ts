@@ -218,6 +218,7 @@ export class GuideRequestComponent implements OnInit {
       casenumber: new FormControl(this.assetRequest ? this.assetRequest.casenumber : ''),
       useridrequested: new FormControl(this.assetRequest ? this.assetRequest.useridrequested : this.currentUserId, [Validators.required]),
       useridguide:  new FormControl(this.currentUserId, [Validators.required]),
+      file: new FormControl(null),
       filereferralguide: new FormControl(this.assetRequest ? this.assetRequest.filereferralguide : ''),
       numberguide: new FormControl(this.assetRequest ? this.assetRequest.numberguide : '', [Validators.required]),
       agencyid: new FormControl(this.assetRequest ? this.assetRequest.agencyid : this.currentAgencyId, [Validators.required]),
@@ -231,6 +232,7 @@ export class GuideRequestComponent implements OnInit {
   }
 
   toggleLiveDemo(id?: number) {
+    this.LimpiarModal();
     this.liveDemoVisible = !this.liveDemoVisible;
     this.form = this.buildForm();
     this.isEdit = false;
@@ -423,6 +425,10 @@ export class GuideRequestComponent implements OnInit {
     this.showFileModal.toggleLiveDemo(data.value);
   }
 
+  isDisabled(): boolean {
+    return this.form.invalid || this.filerequest === null;
+  }
+
   save() {
 
     this.form.get('processstateid').patchValue(this.processStates[0].id);
@@ -490,6 +496,17 @@ export class GuideRequestComponent implements OnInit {
 
   GuideAssetRequest(assetRequest:  IAssetRequest): Observable<BaseResponse> {
     return this.assetRequestService.GuideAssetRequest(assetRequest);
+  }
+
+  LimpiarModal() {
+    this.assetRequest = null;
+    this.productsData = [];
+    this.isEdit = false;
+    this.isRequired = false;
+    this.file = null;
+    this.filerequest = null;
+    this.form = this.buildForm();
+    
   }
 
 }

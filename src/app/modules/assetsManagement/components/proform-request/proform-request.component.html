@@ -158,6 +158,6 @@
     <button (click)="toggleLiveDemo()" cButton color="secondary">
       Cerrar
     </button>
-    <button cButton color="primary" (click)="save()" >Proforma</button>
+    <button cButton color="primary" (click)="save()" [disabled]="isDisabled()">Proforma</button>
   </c-modal-footer>
 </c-modal>

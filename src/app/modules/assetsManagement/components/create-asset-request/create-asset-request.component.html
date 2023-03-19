@@ -98,7 +98,7 @@
           <c-col md="6">
             <div class="mb-1">
               <label cLabel>Archivo</label>
-              <input cFormControl id="formFileLg" sizing="md" type="file" (change)="upLoadFile($event)" />
+              <input cFormControl id="formFileLg" sizing="md" type="file" formControlName="file" (change)="upLoadFile($event)" />
               <c-form-feedback [valid]="false"></c-form-feedback>
             </div>
           </c-col>

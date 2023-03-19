@@ -66,7 +66,7 @@ export class GeneralReportComponent implements OnInit {
     },
     {
       columnName: 'Factura',
-      field: 'state',
+      field: 'invoicenumber',
       type: 'string',
       isModify: false
     },

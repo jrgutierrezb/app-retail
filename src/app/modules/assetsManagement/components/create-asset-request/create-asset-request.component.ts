@@ -145,6 +145,7 @@ export class CreateAssetRequestComponent implements OnInit, AfterViewInit {
       processstateid: new FormControl(this.assetRequest ? this.assetRequest.processstateid : null),
       workdepartmentid: new FormControl(this.assetRequest ? this.assetRequest.workdepartmentid : this.currentWorkdepartmentId, [Validators.required]),
       filerequest: new FormControl(this.assetRequest ? this.assetRequest.filerequest : ''),
+      file: new FormControl(null),
       catalogid: new FormControl(this.assetRequest ? this.assetRequest.catalogid : null, [Validators.required]),
       prioritytypeid: new FormControl(this.assetRequest ? this.assetRequest.prioritytypeid : null, [Validators.required]),
       inventoryproductid: new FormControl(this.assetRequest ? this.assetRequest.inventoryproductid : null, [Validators.required]),
@@ -188,6 +189,8 @@ export class CreateAssetRequestComponent implements OnInit, AfterViewInit {
           }
           this.form = this.buildForm();
           this.onChange();
+          this.InventoriesReg();
+          this.requestedName = this.assetRequest.usernamerequested;
           this.changeDetectorRef.detectChanges();
         }
       }, (error) => {
@@ -300,7 +303,11 @@ export class CreateAssetRequestComponent implements OnInit, AfterViewInit {
   }
 
   InventoriesReg() {
-    this.catalogService.InventoriesReg(this.currentCompanyId, this.currentAgencyId, this.currentWorkdepartmentId).subscribe((respuesta) => {
+    
+    let billingid = this.isEdit ? this.assetRequest.billingid : this.currentCompanyId;
+    let agencyid = this.isEdit ? this.assetRequest.agencyid : this.currentAgencyId;
+    let workdepartmentid = this.isEdit ? this.assetRequest.workdepartmentid : this.currentWorkdepartmentId;
+    this.catalogService.InventoriesReg(billingid, agencyid, workdepartmentid).subscribe((respuesta) => {
       if(!respuesta.error) {
         this.invetoryProducts = respuesta.data;
       }

@@ -110,7 +110,7 @@
           <c-col md="6">
             <div class="mb-1">
               <label cLabel >Guia</label>
-              <input cFormControl id="formFileLg" sizing="md" type="file" (change)="upLoadFile($event)" />
+              <input cFormControl id="formFileLg" sizing="md" type="file" formControlName="file" (change)="upLoadFile($event)" />
               <c-form-feedback [valid]="false"></c-form-feedback>
             </div>
           </c-col>
@@ -175,6 +175,6 @@
     <button (click)="toggleLiveDemo()" cButton color="secondary">
       Cerrar
     </button>
-    <button cButton color="primary" (click)="save()">Cargar</button>
+    <button cButton color="primary" (click)="save()" [disabled]="isDisabled()">Cargar</button>
   </c-modal-footer>
 </c-modal>

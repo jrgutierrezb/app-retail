@@ -395,7 +395,7 @@ export class DispathRequestComponent implements OnInit {
               console.log(result);
               //this.printer();
               this.refreshData.emit();
-              this.handleLiveDemoChange(false);
+              this.isDispath = true;
             }).catch((error) => {
               console.log(error);
             });
@@ -428,8 +428,10 @@ export class DispathRequestComponent implements OnInit {
 
     setTimeout(() => {
       this.alert.sweetAlert('Información', 'Impresora no encontrada en red!', 'info', true, false, 'OK').then((result) => {
+        this.handleLiveDemoChange(false);
         return;
       }).catch((error) => {
+        this.handleLiveDemoChange(false);
         return;
       });
     },3000);
